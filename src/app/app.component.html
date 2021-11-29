@@ -1,48 +1,129 @@
-<div id="subscription_area">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="subscribe_now mt-5">
-          <h4>SAMTC RESULTS</h4>
-          <p>Enter Roll No to get your result!</p>
-          <form class="subscribe_form">
-            <div class="input-group">
-               <input type="text" [(ngModel)]="searchText" class="form-control" name="email" placeholder="Enter Roll No">
-               <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" (click)="search()">Search</button>
-               </span>
+<header class="ma-header navbar">
+  <nav class="container">
+    <div class="logo">
+      <img src="/assets/logo.svg" class="img-fluid" alt="SAMTC" />
+    </div>
+    <!-- <div class="push-left">
+      <li class="menu-item d-lg-none d-md-none d-block">
+        <a
+          class="nav__link cta-btn bg-white text-theme"
+          href="https://api.whatsapp.com/send?text=*प्रदेश%20स्तरीय%20छात्रवृत्ति👨%E2%80%8D🎓%20प्रतियोगिता*%0A%20%60%60%60%7B%20कक्षा%206%20से%2012%20तक%20%7D%60%60%60%20%0A%0A*श्रेणीयां%20:*%0A%0A*जूनियर%20हाईस्कूल*-%20%20कक्षा%206%20से%20कक्षा%208%20तक%20%0A*हाईस्कूल*-%20%20कक्षा%209%20से%20कक्षा%2010%20तक%0A*इंटरमीडिएट*-%20%20कक्षा%2011%20से%20कक्षा%2012%20तक%0A%0A*पुरस्कार%20:*%20%0A%0A*प्रथम*-%20💰11,000+🏆+📜+🏅+🖼%EF%B8%8F+🎁%0A*द्वितीय*-%20💰5100+🏆+📜+🏅+🖼%EF%B8%8F+🎁%0A*तृतीय*-%20💰2100+🏆+📜+🏅+🖼%EF%B8%8F+🎁%0A*30%20सांत्वना%20पुरस्कार*-%20📜+🖼%EF%B8%8F+🎁%0A%7B%20पुरस्कार%20प्रत्येक%20श्रेणी%20के%2033%20विजेताओं%20को%20दिए%20जायेंगे%20%7D%20%0A%0A*परीक्षा%20सारणी:*%20%0A%0A*रजिस्ट्रेशन%20की%20अंतिम%20तिथि*-%2025%20Nov,%202021%0A*प्री%20परीक्षा*-%2028%20Nov,%202021%20(Online)%0A*प्री%20परीक्षा%20रिजल्ट*-%2001%20Dec,%202021%20%20%0A*मुख्य%20परीक्षा*-%2005%20Dec,%202021%20(Offline)%0A*मुख्य%20परीक्षा%20रिजल्ट*-%2012%20Dec,%202021%20%0A*पुरस्कार%20वितरण*-%2017%20Dec,%202021%20%0A*मीडिया%20कवरेज*-%2019%20Dec,%202021%0A%0A*प्रदेश%20स्तरीय%20छात्रवृत्ति%20प्रतियोगिता*%20में%20रजिस्टर%20करने%20के%20लिए%20इस%20लिंक%20पर%20क्लिक%20करें%0A*www.samtc.online*%0A%0A*_इस%20प्रतियोगिता%20में%2010,000%20से%20अधिक%20विद्यार्थियों%20का%20रजिस्ट्रेशन%20नहीं%20किया%20जाएगा_*"
+          ><i class="fa fa-share-alt"></i
+        ></a>
+      </li>
+
+      <ul id="primary-menu" class="menu nav-menu">
+        <li class="menu-item">
+          <a
+            class="nav__link cta-btn bg-white text-theme"
+            target="_blank"
+            href="https://bit.ly/PreExam"
+            >Click For Pre Exam</a
+          >
+        </li>
+      </ul>
+    </div> -->
+  </nav>
+</header>
+<div class="main_container">
+  <section id="subscription_area" class="subscription_area">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="subscribe_now mt-5">
+            <h4>SAMTC RESULTS</h4>
+            <p>Enter Roll No to get your result!</p>
+            <form class="subscribe_form">
+              <div class="input-group">
+                <input
+                  type="text"
+                  [(ngModel)]="searchText"
+                  class="form-control"
+                  name="email"
+                  placeholder="Enter Roll No"
+                />
+                <span class="input-group-btn">
+                  <button
+                    class="btn btn-default"
+                    type="button"
+                    (click)="search()"
+                  >
+                    Search
+                  </button>
+                </span>
+              </div>
+            </form>
+            <div class="row justify-content-center">
+              <span *ngIf="err" style="color: red">{{ this.err }}</span>
+              <div class="col-6 mx-auto result" *ngIf="searchRec">
+                <table class="table w-100 table-striped">
+                  <tr>
+                    <th>Roll No</th>
+                    <td>{{ searchRec.roll_number }}</td>
+                  </tr>
+                  <tr>
+                    <th>Name</th>
+                    <td>{{ searchRec.student_name }}</td>
+                  </tr>
+                  <tr>
+                    <th>Class</th>
+                    <td>{{ searchRec.Class }}</td>
+                  </tr>
+                  <tr>
+                    <th>Score</th>
+                    <td>{{ searchRec.first_level_result }}</td>
+                  </tr>
+                  <tr>
+                    <th>Result</th>
+                    <td>
+                      {{
+                        searchRec.is_first_level_qualified == "NO"
+                          ? "Failed"
+                          : "Passed"
+                      }}
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
-          </form>
-          <div class="row justify-content-center">
-            <span *ngIf="err" style="color: red;">{{this.err}}</span>
-          <div class="col-6 mx-auto result" *ngIf="searchRec">
-            <table class="table w-100 table-striped ">
-            <tr>
-              <th>Roll No</th>
-              <td>{{searchRec.roll_number}}</td>
-            </tr>
-             <tr>
-              <th>Name</th>
-              <td>{{searchRec.student_name}}</td>
-            </tr>
-             <tr>
-              <th>Class</th>
-              <td>{{searchRec.Class}}</td>
-            </tr>
-             <tr>
-              <th>Score</th>
-              <td>{{searchRec.first_level_result}}</td>
-            </tr>
-             <tr>
-              <th>Result</th>
-              <td>{{(searchRec.is_first_level_qualified=='NO')? 'Failed': 'Passed'}}</td>
-            </tr>
-          </table>
           </div>
-          </div>
-          
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section class="smtc-audit smtc-light padding-sy" id="audit-smtc">
+    <div class="container">
+      <div class="smtc-wrap-heading">
+        <h2 class="pre-head">
+          <span class="intro">Co-Sponsored By</span>
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <img src="/assets/balajiRing.jpeg" class="img-fluid" />
+        </div>
+        <div class="col-6">
+          <img src="/assets/balajiRing2.jpeg" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="ma-footer">
+    <div class="px-3 py-md-2 py-0 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center">
+          <p
+            class="
+              d-flex
+              align-items-center
+              my-2 my-lg-0
+              text-white text-decoration-none
+            "
+          >
+            All Rights Reserved © SAMTC, 2021
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
