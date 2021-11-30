@@ -25,86 +25,90 @@
     </div> -->
   </nav>
 </header>
-<div class="main_container">
-  <section id="subscription_area" class="subscription_area">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="subscribe_now mt-5">
-            <p>Enter Roll No to get your result!</p>
-            <form class="subscribe_form">
-              <div class="input-group">
-                <input
-                  type="text"
-                  [(ngModel)]="searchText"
-                  class="form-control"
-                  name="email"
-                  placeholder="Enter Roll No"
-                />
-                <span class="input-group-btn">
-                  <button
-                    class="btn btn-default"
-                    type="button"
-                    (click)="search()"
-                  >
-                    Search
-                  </button>
-                </span>
-              </div>
-            </form>
-            <div class="row justify-content-center mb-2">
-              <span *ngIf="err" class="mt-2 mb-2" style="color: red">{{
-                this.err
-              }}</span>
+<div class="spacer">&nbsp;</div>
+<section id="subscription_area" class="subscription_area">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="subscribe_now mt-5">
+          <p>Enter Roll No to get your result!</p>
+          <form class="subscribe_form">
+            <div class="input-group">
+              <input
+                type="text"
+                [(ngModel)]="searchText"
+                class="form-control"
+                name="email"
+                placeholder="Enter Roll No"
+              />
+              <span class="input-group-btn">
+                <button
+                  class="btn btn-default"
+                  type="button"
+                  (click)="search()"
+                >
+                  Search
+                </button>
+              </span>
+            </div>
+          </form>
+          <div class="row justify-content-center mb-2">
+            <span *ngIf="err" class="mt-2 mb-2" style="color: red">{{
+              this.err
+            }}</span>
 
-              <div class="col-12 col-md-6 mx-auto result" *ngIf="searchRec">
-                <div class="row mb-2 p-2">
-                  <span class="alert alert-warning text-center w-100">{{
-                    searchRec.Message
-                  }}</span>
-                </div>
-                <table class="table w-100 table-striped">
-                  <tr>
-                    <th>Name</th>
-                    <td>{{ searchRec.Name }}</td>
-                  </tr>
-                  <tr>
-                    <th>Class</th>
-                    <td>{{ searchRec.Class }}</td>
-                  </tr>
-                  <tr>
-                    <th>School</th>
-                    <td>{{ searchRec.School }}</td>
-                  </tr>
-                  <tr>
-                    <th>Score</th>
-                    <td>{{ searchRec.Score }}</td>
-                  </tr>
-                  <tr>
-                    <th>Result</th>
-                    <td>
-                      {{ searchRec.Result }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Certificate</th>
-                    <td>
-                      <a
-                        [href]="searchRec.Download"
-                        title="Download Certificate"
-                        target="_blank"
-                        >Click Here</a
-                      >
-                    </td>
-                  </tr>
-                </table>
+            <div class="col-12 col-md-6 mx-auto result" *ngIf="searchRec">
+              <div class="row mb-2 p-2">
+                <span class="alert alert-warning text-center w-100">{{
+                  searchRec.Message
+                }}</span>
               </div>
+              <table class="table w-100 table-striped">
+                <tr>
+                  <th>Name</th>
+                  <td>{{ searchRec.Name }}</td>
+                </tr>
+                <tr>
+                  <th>Class</th>
+                  <td>{{ searchRec.Class }}</td>
+                </tr>
+                <tr>
+                  <th>School</th>
+                  <td>{{ searchRec.School }}</td>
+                </tr>
+                <tr>
+                  <th>Score</th>
+                  <td>{{ searchRec.Score }}</td>
+                </tr>
+                <tr>
+                  <th>Result</th>
+                  <td>
+                    {{ searchRec.Result }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Certificate</th>
+                  <td>
+                    <a
+                      [href]="searchRec.Download"
+                      title="Download Certificate"
+                      target="_blank"
+                      *ngIf="searchRec.Download"
+                      >Click Here</a
+                    >
+                    <span *ngIf="!searchRec.Download">NA</span>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<footer class="ma-footer" [class.ma-footer-mob]="!searchRec">
   <section class="smtc-audit smtc-light padding-sy" id="audit-smtc">
     <div class="container">
       <div class="smtc-wrap-heading">
@@ -122,22 +126,23 @@
       </div>
     </div>
   </section>
-  <footer class="ma-footer">
-    <div class="px-3 py-md-2 py-0 bg-dark text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center">
-          <p
-            class="
-              d-flex
-              align-items-center
-              my-2 my-lg-0
-              text-white text-decoration-none
-            "
-          >
-            All Rights Reserved © SAMTC, 2021
-          </p>
-        </div>
+  <div
+    class="px-3 py-md-2 py-0 text-white"
+    style="background-color: #316eae !important"
+  >
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center">
+        <p
+          class="
+            d-flex
+            align-items-center
+            my-2 my-lg-0
+            text-white text-decoration-none
+          "
+        >
+          All Rights Reserved © SAMTC, 2021
+        </p>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
