@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import data from "src/assets/samtc_results.json";
 
 @Component({
   selector: "app-results-page",
@@ -10,11 +11,12 @@ export class ResultsPageComponent implements OnInit {
   searchText;
   searchRec;
   err;
-  mainJson = [];
+  mainJson: Record[] = [];
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getData();
+    this.mainJson = data;
+    //this.getData();
   }
 
   getData() {
