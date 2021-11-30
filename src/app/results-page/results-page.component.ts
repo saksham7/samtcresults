@@ -55,10 +55,10 @@ export class ResultsPageComponent implements OnInit {
         (x) => x.Roll_No == this.searchText
       )[0];
       if (!this.searchRec) {
-        this.err = "No record found";
+        this.err = "यह रोल नंबर गलत है |";
       }
     } else {
-      this.err = "No record found";
+      this.err = "यह रोल नंबर गलत है |";
     }
   }
 }
